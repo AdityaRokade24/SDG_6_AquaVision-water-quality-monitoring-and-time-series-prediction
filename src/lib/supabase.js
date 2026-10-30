@@ -108,10 +108,12 @@ export function getSupabaseConfig() {
   } catch (e) {
     console.error('Failed to parse Supabase config', e);
   }
+  const envUrl = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPABASE_URL) || '';
+  const envKey = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPABASE_ANON_KEY) || '';
   return {
-    url: '',
-    anonKey: '',
-    isConnected: false
+    url: envUrl,
+    anonKey: envKey,
+    isConnected: Boolean(envUrl && envKey)
   };
 }
 
