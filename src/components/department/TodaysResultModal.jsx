@@ -78,9 +78,9 @@ export default function TodaysResultModal({ isOpen, onClose, telemetryData, onRe
     const row = [
       `"${telemetryData.station_name || 'River Station'}"`,
       new Date().toISOString(),
-      wqi,
-      status,
-      advisory.overallRisk,
+      analysis.wqi,
+      `"${analysis.status}"`,
+      `"${advisory.overallRisk}"`,
       telemetryData.ph,
       telemetryData.do_level,
       telemetryData.temperature,
@@ -100,28 +100,28 @@ export default function TodaysResultModal({ isOpen, onClose, telemetryData, onRe
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in overflow-y-auto">
-      <div className="relative w-full max-w-3xl bg-slate-900 border border-cyan-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-cyan-950/70 my-8 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fade-in overflow-y-auto">
+      <div className="relative w-full max-w-3xl bg-slate-900 border border-cyan-500/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl shadow-cyan-950/70 my-auto max-h-[92vh] overflow-y-auto">
         
         {/* Ambient Glow */}
         <div className="absolute -top-32 -right-32 w-80 h-80 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
 
         {/* Modal Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-slate-800 relative z-10">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-2xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
-              <Sparkles className="w-6 h-6" />
+        <div className="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-slate-800 relative z-10">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 shrink-0">
+              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <h2 className="text-xl font-extrabold text-white tracking-tight">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h2 className="text-base sm:text-xl font-extrabold text-white tracking-tight">
                   Today's Water Quality Result
                 </h2>
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 uppercase">
+                <span className="px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 uppercase">
                   Live Analysis
                 </span>
               </div>
-              <p className="text-xs text-slate-400">
+              <p className="text-[11px] sm:text-xs text-slate-400 truncate max-w-[240px] sm:max-w-md">
                 {telemetryData.station_name || 'River Ganga Station'} • Logged by {telemetryData.logged_by || 'Field Officer'}
               </p>
             </div>
@@ -129,22 +129,22 @@ export default function TodaysResultModal({ isOpen, onClose, telemetryData, onRe
 
           <button 
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition shrink-0 active:scale-95"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Primary Score & Status Card */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 my-5 sm:my-6">
           
           {/* Dial / Score */}
-          <div className="p-6 rounded-2xl bg-slate-950/80 border border-slate-800 flex flex-col items-center justify-center text-center">
-            <div className="text-[11px] uppercase font-bold text-slate-400 tracking-wider">
+          <div className="p-4 sm:p-6 rounded-2xl bg-slate-950/80 border border-slate-800 flex flex-col items-center justify-center text-center">
+            <div className="text-[10px] sm:text-[11px] uppercase font-bold text-slate-400 tracking-wider">
               Water Quality Index
             </div>
             <div 
-              className="text-5xl font-mono font-black my-2"
+              className="text-4xl sm:text-5xl font-mono font-black my-1 sm:my-2"
               style={{ color }}
             >
               {wqi}
@@ -161,19 +161,19 @@ export default function TodaysResultModal({ isOpen, onClose, telemetryData, onRe
           </div>
 
           {/* Compliance & Bathing Suitability */}
-          <div className="p-5 rounded-2xl bg-slate-950/80 border border-slate-800 flex flex-col justify-between">
+          <div className="p-4 sm:p-5 rounded-2xl bg-slate-950/80 border border-slate-800 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between">
-                <span className="text-[11px] uppercase font-bold text-slate-400 tracking-wider">
+                <span className="text-[10px] sm:text-[11px] uppercase font-bold text-slate-400 tracking-wider">
                   Pilgrim Snan Suitability
                 </span>
-                <span className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase border ${
+                <span className={`px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-extrabold uppercase border ${
                   wqi >= 70 ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' : 'bg-amber-500/20 text-amber-300 border-amber-500/30'
                 }`}>
                   {wqi >= 70 ? 'Optimal for Snan' : 'Bathing Caution'}
                 </span>
               </div>
-              <div className="text-sm font-bold text-white mt-2">
+              <div className="text-xs sm:text-sm font-bold text-white mt-1.5 sm:mt-2">
                 {wqi >= 75 ? 'Safe for Sacred Holy Dip' : wqi >= 55 ? 'Requires Ghat Filtration' : 'Hazardous for Bathing'}
               </div>
               <p className="text-[11px] text-slate-300 mt-1 leading-relaxed">
@@ -181,7 +181,7 @@ export default function TodaysResultModal({ isOpen, onClose, telemetryData, onRe
               </p>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+            <div className="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px] sm:text-xs">
               <span className="text-slate-400">CPCB Hazard Level:</span>
               <span className={`font-bold ${
                 advisory.overallRisk === 'Critical' ? 'text-rose-400' :
@@ -194,16 +194,16 @@ export default function TodaysResultModal({ isOpen, onClose, telemetryData, onRe
           </div>
 
           {/* 7-Day Trend Outlook & Confluence Hours */}
-          <div className="p-5 rounded-2xl bg-slate-950/80 border border-slate-800 flex flex-col justify-between">
+          <div className="p-4 sm:p-5 rounded-2xl bg-slate-950/80 border border-slate-800 flex flex-col justify-between">
             <div>
-              <span className="text-[11px] uppercase font-bold text-slate-400 tracking-wider">
+              <span className="text-[10px] sm:text-[11px] uppercase font-bold text-slate-400 tracking-wider">
                 7-Day Prognosis & Snan Window
               </span>
-              <div className="text-sm font-bold text-cyan-300 mt-2 flex items-center gap-1.5">
-                <Calendar className="w-4 h-4 text-cyan-400" />
+              <div className="text-xs sm:text-sm font-bold text-cyan-300 mt-1.5 sm:mt-2 flex items-center gap-1.5">
+                <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400" />
                 <span>Next 7 Days Trend</span>
               </div>
-              <p className="text-[11px] text-slate-300 mt-1">
+              <p className="text-[11px] text-slate-300 mt-1 leading-relaxed">
                 Projected WQI drift: <strong className="text-white">{advisory.wqiTrend7d > 0 ? `+${advisory.wqiTrend7d}` : advisory.wqiTrend7d} pts</strong>.
                 Lowest 24h DO: <strong className="text-emerald-300">{advisory.min24hDO} mg/L</strong>.
               </p>
@@ -212,7 +212,7 @@ export default function TodaysResultModal({ isOpen, onClose, telemetryData, onRe
               </div>
             </div>
 
-            <div className="mt-3 pt-2 border-t border-slate-800/80 text-[10px] text-slate-400">
+            <div className="mt-2 pt-2 border-t border-slate-800/80 text-[10px] text-slate-400">
               Validated against CPCB Gazette Class B
             </div>
           </div>
@@ -220,20 +220,20 @@ export default function TodaysResultModal({ isOpen, onClose, telemetryData, onRe
         </div>
 
         {/* Parameters Grid */}
-        <div className="mb-6">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
+        <div className="mb-5 sm:mb-6">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5 sm:mb-3 flex items-center gap-1.5">
             <Droplet className="w-3.5 h-3.5 text-cyan-400" />
             Today's Ingested Physicochemical Parameters
           </h4>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
             {Object.entries(PARAM_STANDARDS).map(([key, std]) => {
               const val = telemetryData[key];
               const q_i = analysis.subIndices[key] || 0;
               return (
-                <div key={key} className="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <div key={key} className="p-2.5 sm:p-3 rounded-xl bg-slate-950 border border-slate-800">
                   <div className="text-[10px] text-slate-400 truncate">{std.name}</div>
-                  <div className="text-sm font-mono font-bold text-cyan-300 mt-0.5">
+                  <div className="text-xs sm:text-sm font-mono font-bold text-cyan-300 mt-0.5">
                     {val} <span className="text-[10px] text-slate-500 font-normal">{std.unit}</span>
                   </div>
                   <div className="text-[9px] text-slate-400 mt-1 flex justify-between">
@@ -250,7 +250,7 @@ export default function TodaysResultModal({ isOpen, onClose, telemetryData, onRe
 
         {/* Violations notice if any */}
         {violations && violations.length > 0 && (
-          <div className="mb-6 p-3.5 rounded-xl bg-rose-950/40 border border-rose-500/30 text-xs text-rose-200 flex items-start gap-2.5">
+          <div className="mb-5 p-3 rounded-xl bg-rose-950/40 border border-rose-500/30 text-xs text-rose-200 flex items-start gap-2.5">
             <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
             <div>
               <span className="font-bold text-white">Alert:</span> {violations.map(v => `${v.name} (${v.value} vs limit ${v.limit})`).join(', ')}
@@ -259,19 +259,19 @@ export default function TodaysResultModal({ isOpen, onClose, telemetryData, onRe
         )}
 
         {/* Action Buttons: Save to Supabase Cloud & Export */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-800">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-slate-800">
           <button
             onClick={handleExportCSV}
-            className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition flex items-center justify-center gap-2 active:scale-95"
           >
             <Download className="w-4 h-4" />
             <span>Download CPCB Lab Report (CSV)</span>
           </button>
 
-          <div className="flex items-center gap-2 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
             <button
               onClick={onClose}
-              className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition"
+              className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition text-center"
             >
               Close
             </button>
@@ -280,7 +280,7 @@ export default function TodaysResultModal({ isOpen, onClose, telemetryData, onRe
               id="modal-save-to-dept-btn"
               onClick={handleSaveToCloud}
               disabled={isSaving || saveSuccess}
-              className={`w-full sm:w-auto px-6 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg ${
+              className={`w-full sm:w-auto px-6 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg active:scale-95 ${
                 saveSuccess
                   ? 'bg-emerald-500 text-slate-950'
                   : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-cyan-500/25'

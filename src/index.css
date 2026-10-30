@@ -12,14 +12,20 @@
     --neon-rose: #f43f5e;
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: #030712;
     color: #e2e8f0;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* Custom scrollbar */
+  /* Custom scrollbar for desktop */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -34,6 +40,51 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #0284c7;
   }
+}
+
+/* Touch-friendly Range Slider Styling for Mobile & Desktop */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #1e293b;
+  border-radius: 9999px;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #00f2fe;
+  cursor: pointer;
+  border: 2px solid #030712;
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover,
+input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(1.2);
+  background: #38bdf8;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #00f2fe;
+  cursor: pointer;
+  border: 2px solid #030712;
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+/* Scrollbar utilities */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
 
 /* Glassmorphic Components */
@@ -90,4 +141,3 @@
 .animate-pulse-subtle {
   animation: pulse-subtle 3s infinite ease-in-out;
 }
-

@@ -38,34 +38,34 @@ export default function LiveApiModal({ isOpen, onClose, onTelemetryFetched }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-      <div className="relative w-full max-w-xl bg-slate-900 border border-cyan-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-cyan-950/70 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fade-in overflow-y-auto">
+      <div className="relative w-full max-w-xl bg-slate-900 border border-cyan-500/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl shadow-cyan-950/70 my-auto max-h-[92vh] overflow-y-auto">
         
         {/* Glow */}
         <div className="absolute -top-24 -right-24 w-60 h-60 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-2xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+        <div className="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-slate-800">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 shrink-0">
               <Radio className="w-5 h-5 animate-pulse text-cyan-400" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-white">Live Government API Ingestion</h2>
-              <p className="text-xs text-slate-400">Fetch real-time Prayagraj Triveni Sangam water quality directly</p>
+              <h2 className="text-base sm:text-lg font-bold text-white">Live Government API Ingestion</h2>
+              <p className="text-[11px] sm:text-xs text-slate-400">Fetch real-time Prayagraj Triveni Sangam water quality directly</p>
             </div>
           </div>
 
           <button 
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition shrink-0 active:scale-95"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <form onSubmit={handleFetch} className="mt-5 space-y-4">
+        <form onSubmit={handleFetch} className="mt-4 sm:mt-5 space-y-4">
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1 flex items-center justify-between">
+            <label className="block text-xs font-bold text-slate-300 mb-1 flex items-center justify-between flex-wrap gap-1">
               <span className="flex items-center gap-1.5">
                 <Key className="w-3.5 h-3.5 text-cyan-400" />
                 Data.gov.in / CPCB API Key (Optional)
@@ -85,9 +85,9 @@ export default function LiveApiModal({ isOpen, onClose, onTelemetryFetched }) {
               placeholder="Paste your data.gov.in API key here..."
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
             />
-            <p className="text-[11px] text-slate-400 mt-1">
+            <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
               Leave blank to automatically stream from verified CPCB Prayagraj Sangam Continuous Water Quality Monitoring Buoys.
             </p>
           </div>
@@ -103,11 +103,11 @@ export default function LiveApiModal({ isOpen, onClose, onTelemetryFetched }) {
             </div>
           )}
 
-          <div className="flex items-center justify-between pt-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-3 border-t border-slate-800">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs text-slate-400 hover:text-white transition"
+              className="px-4 py-2 text-xs text-slate-400 hover:text-white transition text-center"
             >
               Cancel
             </button>
@@ -115,7 +115,7 @@ export default function LiveApiModal({ isOpen, onClose, onTelemetryFetched }) {
             <button
               type="submit"
               disabled={isLoading}
-              className="px-5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 transition flex items-center gap-2"
+              className="px-5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 transition flex items-center justify-center gap-2 active:scale-95"
             >
               {isLoading ? (
                 <>

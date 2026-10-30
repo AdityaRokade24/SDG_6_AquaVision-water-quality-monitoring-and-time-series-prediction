@@ -132,15 +132,15 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
   };
 
   return (
-    <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-cyan-500/20 shadow-xl relative overflow-hidden">
+    <div className="glass-panel p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border border-cyan-500/20 shadow-xl relative overflow-hidden">
       
-      {/* Glow */}
+      {/* Ambient Glow */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 sm:pb-6 border-b border-slate-800">
         <div>
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1.5 flex-wrap">
             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase">
               Public Water Quality Tester
             </span>
@@ -151,49 +151,49 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
           <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
             Today's Sangam Water Tester & File Upload
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-            Anyone can type today's test values or drop a CSV/JSON telemetry file to get an instant WQI score, religious bathing safety grade, and 7-day forecast.
+          <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">
+            Anyone can enter today's test values or drop a CSV/JSON telemetry file to get an instant WQI score, religious bathing safety grade, and 7-day forecast.
           </p>
         </div>
 
         {/* Entry mode toggle */}
-        <div className="flex p-1 rounded-2xl bg-slate-950 border border-slate-800 text-xs font-semibold shrink-0">
+        <div className="grid grid-cols-2 p-1 rounded-2xl bg-slate-950 border border-slate-800 text-xs font-semibold w-full sm:w-auto shrink-0">
           <button
             type="button"
             onClick={() => setEntryMode('manual')}
-            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl transition ${
+            className={`flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl transition ${
               entryMode === 'manual'
                 ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
-            <Sliders className="w-4 h-4" />
-            <span>Type Today's Data</span>
+            <Sliders className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+            <span className="truncate">Type Data</span>
           </button>
           <button
             type="button"
             onClick={() => setEntryMode('upload')}
-            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl transition ${
+            className={`flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl transition ${
               entryMode === 'upload'
                 ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
-            <Upload className="w-4 h-4" />
-            <span>Upload File (CSV/JSON)</span>
+            <Upload className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+            <span className="truncate">Upload File</span>
           </button>
         </div>
       </div>
 
       {/* Manual Entry Form */}
       {entryMode === 'manual' ? (
-        <form onSubmit={handleManualSubmit} className="mt-6 space-y-6">
+        <form onSubmit={handleManualSubmit} className="mt-5 sm:mt-6 space-y-5 sm:space-y-6">
           
           {/* Metadata Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4">
             <div>
               <label className="block text-xs font-bold text-slate-300 mb-1 flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                <MapPin className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                 Sangam Monitoring Sector
               </label>
               <select
@@ -210,8 +210,8 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
 
             <div>
               <label className="block text-xs font-bold text-slate-300 mb-1 flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-cyan-400" />
-                Logged By (Your Name / Role)
+                <User className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                Logged By (Name / Role)
               </label>
               <input
                 type="text"
@@ -224,8 +224,8 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
 
             <div>
               <label className="block text-xs font-bold text-slate-300 mb-1 flex items-center gap-1.5">
-                <Info className="w-3.5 h-3.5 text-cyan-400" />
-                Sampling Remarks / Observations
+                <Info className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                Remarks / Observations
               </label>
               <input
                 type="text"
@@ -239,14 +239,14 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
 
           {/* Parameters Grid */}
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2 sm:mb-3">
               Physicochemical Sensor Values
             </span>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 sm:gap-3">
               
               {/* pH */}
-              <div className="p-3 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <div className="p-3 rounded-xl sm:rounded-2xl bg-slate-950/70 border border-slate-800">
                 <label className="text-[11px] font-bold text-slate-300 block mb-1">pH Level</label>
                 <input
                   type="number"
@@ -255,13 +255,13 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
                   max="14"
                   value={formData.ph}
                   onChange={(e) => handleInputChange('ph', parseFloat(e.target.value) || 0)}
-                  className="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
+                  className="w-full px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs sm:text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
                 />
                 <span className="text-[9px] text-slate-500 mt-1 block">Safe: 6.5 - 8.5</span>
               </div>
 
               {/* DO */}
-              <div className="p-3 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <div className="p-3 rounded-xl sm:rounded-2xl bg-slate-950/70 border border-slate-800">
                 <label className="text-[11px] font-bold text-slate-300 block mb-1">DO (mg/L)</label>
                 <input
                   type="number"
@@ -270,13 +270,13 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
                   max="20"
                   value={formData.do_level}
                   onChange={(e) => handleInputChange('do_level', parseFloat(e.target.value) || 0)}
-                  className="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
+                  className="w-full px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs sm:text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
                 />
                 <span className="text-[9px] text-slate-500 mt-1 block">Bathing: ≥ 5.0</span>
               </div>
 
               {/* BOD */}
-              <div className="p-3 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <div className="p-3 rounded-xl sm:rounded-2xl bg-slate-950/70 border border-slate-800">
                 <label className="text-[11px] font-bold text-slate-300 block mb-1">BOD (mg/L)</label>
                 <input
                   type="number"
@@ -285,13 +285,13 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
                   max="30"
                   value={formData.bod}
                   onChange={(e) => handleInputChange('bod', parseFloat(e.target.value) || 0)}
-                  className="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
+                  className="w-full px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs sm:text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
                 />
                 <span className="text-[9px] text-slate-500 mt-1 block">Safe: ≤ 3.0</span>
               </div>
 
               {/* Temp */}
-              <div className="p-3 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <div className="p-3 rounded-xl sm:rounded-2xl bg-slate-950/70 border border-slate-800">
                 <label className="text-[11px] font-bold text-slate-300 block mb-1">Temp (°C)</label>
                 <input
                   type="number"
@@ -300,13 +300,13 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
                   max="50"
                   value={formData.temperature}
                   onChange={(e) => handleInputChange('temperature', parseFloat(e.target.value) || 0)}
-                  className="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
+                  className="w-full px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs sm:text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
                 />
-                <span className="text-[9px] text-slate-500 mt-1 block">Normal: 18 - 25°C</span>
+                <span className="text-[9px] text-slate-500 mt-1 block">18 - 25°C</span>
               </div>
 
               {/* Conductivity */}
-              <div className="p-3 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <div className="p-3 rounded-xl sm:rounded-2xl bg-slate-950/70 border border-slate-800">
                 <label className="text-[11px] font-bold text-slate-300 block mb-1">EC (µS/cm)</label>
                 <input
                   type="number"
@@ -315,14 +315,14 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
                   max="5000"
                   value={formData.conductivity}
                   onChange={(e) => handleInputChange('conductivity', parseFloat(e.target.value) || 0)}
-                  className="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
+                  className="w-full px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs sm:text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
                 />
                 <span className="text-[9px] text-slate-500 mt-1 block">Fresh: &lt; 500</span>
               </div>
 
               {/* Turbidity */}
-              <div className="p-3 rounded-2xl bg-slate-950/70 border border-slate-800">
-                <label className="text-[11px] font-bold text-slate-300 block mb-1">Turbidity (NTU)</label>
+              <div className="p-3 rounded-xl sm:rounded-2xl bg-slate-950/70 border border-slate-800">
+                <label className="text-[11px] font-bold text-slate-300 block mb-1">Turbidity</label>
                 <input
                   type="number"
                   step="0.1"
@@ -330,13 +330,13 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
                   max="100"
                   value={formData.turbidity}
                   onChange={(e) => handleInputChange('turbidity', parseFloat(e.target.value) || 0)}
-                  className="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
+                  className="w-full px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs sm:text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
                 />
-                <span className="text-[9px] text-slate-500 mt-1 block">Safe: &lt; 10</span>
+                <span className="text-[9px] text-slate-500 mt-1 block">Safe: &lt; 10 NTU</span>
               </div>
 
               {/* ORP */}
-              <div className="p-3 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <div className="p-3 rounded-xl sm:rounded-2xl bg-slate-950/70 border border-slate-800">
                 <label className="text-[11px] font-bold text-slate-300 block mb-1">ORP (mV)</label>
                 <input
                   type="number"
@@ -345,7 +345,7 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
                   max="600"
                   value={formData.orp}
                   onChange={(e) => handleInputChange('orp', parseFloat(e.target.value) || 0)}
-                  className="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
+                  className="w-full px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs sm:text-sm font-mono font-bold text-cyan-300 focus:outline-none focus:border-cyan-400"
                 />
                 <span className="text-[9px] text-slate-500 mt-1 block">Safe: &gt; 250</span>
               </div>
@@ -354,15 +354,15 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
           </div>
 
           {/* Action Trigger */}
-          <div className="flex items-center justify-between pt-4 border-t border-slate-800">
-            <span className="text-xs text-slate-400">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-slate-800">
+            <span className="text-xs text-slate-400 leading-snug">
               Evaluates CPCB religious bathing suitability, 24h oxygen fluctuation, and 7-day outlook.
             </span>
 
             <button
               id="analyze-todays-reading-btn"
               type="submit"
-              className="px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 transition flex items-center gap-2 group"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 transition flex items-center justify-center gap-2 group shrink-0 active:scale-95"
             >
               <Sparkles className="w-4 h-4 text-cyan-200" />
               <span>Analyze Today's Sangam Result</span>
@@ -373,11 +373,11 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
         </form>
       ) : (
         /* File Upload Mode */
-        <div className="mt-6 space-y-6">
+        <div className="mt-5 sm:mt-6 space-y-5 sm:space-y-6">
           
           <div 
             onClick={() => fileInputRef.current?.click()}
-            className="p-8 sm:p-12 rounded-3xl border-2 border-dashed border-cyan-500/30 hover:border-cyan-400 bg-slate-950/60 hover:bg-slate-950/90 text-center cursor-pointer transition group"
+            className="p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl border-2 border-dashed border-cyan-500/30 hover:border-cyan-400 bg-slate-950/60 hover:bg-slate-950/90 text-center cursor-pointer transition group"
           >
             <input 
               ref={fileInputRef}
@@ -387,18 +387,18 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
               className="hidden" 
             />
             
-            <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <Upload className="w-7 h-7" />
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform">
+              <Upload className="w-6 h-6 sm:w-7 sm:h-7" />
             </div>
 
-            <h3 className="text-base font-bold text-white">
-              {uploadedFile ? uploadedFile.name : "Drag and drop Today's CSV or JSON Water Telemetry File"}
+            <h3 className="text-sm sm:text-base font-bold text-white">
+              {uploadedFile ? uploadedFile.name : "Drag & drop or tap to upload Today's CSV / JSON"}
             </h3>
-            <p className="text-xs text-slate-400 mt-1 max-w-md mx-auto">
+            <p className="text-[11px] sm:text-xs text-slate-400 mt-1 max-w-md mx-auto">
               Upload laboratory water quality reports or IoT data logs to inspect today's result instantly.
             </p>
 
-            <span className="mt-4 inline-block px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+            <span className="mt-3.5 inline-block px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
               Browse Files
             </span>
           </div>
@@ -428,7 +428,7 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
               <button
                 id="analyze-uploaded-file-btn"
                 onClick={handleAnalyzeUploaded}
-                className="px-5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 shadow-lg shadow-emerald-500/20 transition flex items-center gap-2 shrink-0"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2 shrink-0 active:scale-95"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Analyze Uploaded File</span>
@@ -437,11 +437,11 @@ export default function TodaysDataEntry({ onAnalyzeToday }) {
             </div>
           )}
 
-          <div className="flex items-center justify-between pt-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2">
             <span className="text-xs text-slate-400">Need a sample format?</span>
             <button
               onClick={downloadSampleCSV}
-              className="flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition"
+              className="flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition self-start sm:self-auto"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Download Sample Prayagraj Sangam CSV Template</span>
